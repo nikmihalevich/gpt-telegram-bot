@@ -39,6 +39,19 @@ class OpenAI {
 			console.log('Erorr while transcribing mp3 file', e.message);
 		}
 	}
+
+	async paint(messages) {
+		try {
+			const response = await this.openai.createImage({
+				prompt: messages,
+				n: 1,
+				size: '512x512',
+			});
+			return response.data.data[0].url;
+		} catch (e) {
+			console.log('Error while painting', e.message);
+		}
+	}
 }
 
 export const openai = new OpenAI(
