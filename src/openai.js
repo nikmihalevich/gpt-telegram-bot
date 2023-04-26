@@ -22,7 +22,7 @@ class OpenAI {
 				model: 'gpt-3.5-turbo',
 				messages,
 			});
-      return response.data.choices[0].message
+			return response.data.choices[0].message;
 		} catch (e) {
 			console.log('Error while chatting with GPT', e.message);
 		}
@@ -41,4 +41,6 @@ class OpenAI {
 	}
 }
 
-export const openai = new OpenAI(config.get('OPENAI_APIKEY'));
+export const openai = new OpenAI(
+	config.get('OPENAI_APIKEY') ? config.get('OPENAI_APIKEY') : process.env.OPENAI_APIKEY,
+);
